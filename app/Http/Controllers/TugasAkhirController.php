@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use mysql_xdevapi\Result;
 use App\Repositories\DataRepositories;
 use App\Repositories\ProcessRepository;
+use App\Repositories\SlangRepositories;
 use App\Post;
 
 
 class TugasAkhirController extends Controller
 {
 
-    public function __construct(DataRepositories $dataRepositories, ProcessRepository $processRepository)
+    public function __construct(DataRepositories $dataRepositories, ProcessRepository $processRepository, SlangRepositories $slangRepositories)
     {
         $this->dataRepositories = $dataRepositories;
         $this->processRepositories = $processRepository;
+        $this->slangRepositories = $slangRepositories;
     }
 
 
@@ -96,6 +98,11 @@ class TugasAkhirController extends Controller
 ////
 ////        dd($hello);
 ///
+///
+///
+///
+///
+
 
 
 
@@ -107,8 +114,15 @@ class TugasAkhirController extends Controller
     public function processing($query){
 
         $tweets = $this->dataRepositories->getTweets($query);
-        $trainingData = $this->dataRepositories->getTrainingData();
-        $sentimenValue = $this->dataRepositories->getSentimenValue();
+//        $trainingData = $this->dataRepositories->getTrainingData();
+//        $sentimenValue = $this->dataRepositories->getSentimenValue();
+
+//        $trainingData = $this->processRepositories->preProcessing($trainingData);
+
+
+
+        $tweets = $this->processRepositories->preProcessing($tweets);
+
 
 
 
