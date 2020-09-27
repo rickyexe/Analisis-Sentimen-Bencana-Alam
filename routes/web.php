@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'TugasAkhirController@index');
+Route::get('/hasil-analisa/{query}', 'TugasAkhirController@processing')->name('hasil-analisa');
 
 Route::get('/user', 'UserController@index');
 Route::get('/user/edit/{id}', 'UserController@edit');
