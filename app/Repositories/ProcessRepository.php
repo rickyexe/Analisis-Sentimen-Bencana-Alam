@@ -5,9 +5,11 @@ namespace App\Repositories;
 
 use Sastrawi\StopWordRemover\StopWordRemoverFactory;
 use \Sastrawi\Stemmer\StemmerFactory;
+use Phpml\FeatureExtraction\TokenCountVectorizer;
+use Phpml\Tokenization\WhitespaceTokenizer;
+use Phpml\FeatureExtraction\TfIdfTransformer;
 use Phpml\Classification\KNearestNeighbors;
 use Phpml\Math\Distance\Cosine;
-use Phpml\FeatureExtraction\TfIdfTransformer;
 use App\Repositories\SlangRepositories;
 
 
@@ -48,6 +50,20 @@ class ProcessRepository {
 
         return $data;
 
+    }
+
+    public function getTFIDF($data){
+
+        $tf = new TokenCountVectorizer(new WhitespaceTokenizer());
+        $tf->fit($data);
+        $tf->transform($data);
+
+        $tfidf = new TfIdfTransformer($data);
+        $tfidf->transform($data);
+
+
+
+        return $data;
     }
 
     public function removeSymbolandNumber($data){
@@ -137,9 +153,6 @@ class ProcessRepository {
 
 
         return $data;
-
-
-
 
     }
 

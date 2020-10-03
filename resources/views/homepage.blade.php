@@ -51,14 +51,14 @@
         }
 
 
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-            background-color: #f5f5f5;
-        }
+        /*.footer {*/
+        /*    position: absolute;*/
+        /*    bottom: 0;*/
+        /*    width: 100%;*/
+        /*    height: 60px;*/
+        /*    line-height: 60px;*/
+        /*    background-color: #f5f5f5;*/
+        /*}*/
 
 
 
@@ -145,11 +145,20 @@
 
 
 </div>
-<footer class="footer">
-    <div class="container" style="margin-right: auto">
-        <span>Ricky Gideon 2020</span>
+<footer class="footer mt-5" style="background-color: #3097D1">
+    <div class="container">
+        <div class="row">
+            <h1 class="display-5 font-weight-bold text-center" style="font-size: 1.25em; color: white">Ricky Gideon 2020</h1>
+        </div>
+
     </div>
+
 </footer>
+{{--<footer class="footer">--}}
+{{--    <div class="container" style="margin-left: auto">--}}
+{{--        <span>Ricky Gideon 2020</span>--}}
+{{--    </div>--}}
+{{--</footer>--}}
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

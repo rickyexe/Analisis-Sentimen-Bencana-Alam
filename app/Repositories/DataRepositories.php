@@ -37,7 +37,13 @@ class DataRepositories {
 
         $trainingData = Post::select('post')->get();
 
-        return $trainingData;
+        $data = array();
+        foreach ($trainingData as $item) {
+
+            array_push($data, $item->post);
+        }
+
+        return $data;
     }
 
     public function getSentimenValue()
@@ -45,7 +51,13 @@ class DataRepositories {
 
         $sentimenValue = Post::select('nilai_sentimen')->get();
 
-        return $sentimenValue;
+        $data = array();
+        foreach ($sentimenValue as $item) {
+
+            array_push($data, $item->nilai_sentimen);
+        }
+
+        return $data;
     }
 
 
