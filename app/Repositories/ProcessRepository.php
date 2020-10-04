@@ -8,8 +8,6 @@ use \Sastrawi\Stemmer\StemmerFactory;
 use Phpml\FeatureExtraction\TokenCountVectorizer;
 use Phpml\Tokenization\WhitespaceTokenizer;
 use Phpml\FeatureExtraction\TfIdfTransformer;
-use Phpml\Classification\KNearestNeighbors;
-use Phpml\Math\Distance\Cosine;
 use App\Repositories\SlangRepositories;
 
 
@@ -33,6 +31,7 @@ class ProcessRepository {
         $data = $this->removeURL($data);
         $data = $this->removeSymbolandNumber($data);
         $data = $this->replaceSlangWord($data);
+
 
         $stopwordFactory = new StopWordRemoverFactory();
         $stopword = $stopwordFactory->createStopWordRemover();
@@ -122,7 +121,7 @@ class ProcessRepository {
     public function replaceSlangWord($data){
 
         $slang = $this->slangRepositories->getSlang();
-        $slangConversion = $this->slangRepositories->getSlangConvertion();
+        $slangConversion = $this->slangRepositories->getSlangConversion();
 
         for ($i = 0 ; $i < count($data) ; $i++)
         {
@@ -144,11 +143,13 @@ class ProcessRepository {
                     array_push($storeForImplode, $dataSplit[$j]);
                 }
 
-                $implodeResult = implode(" ", $storeForImplode);
-                $data[$i] = $implodeResult;
-
             }
+
+            $implodeResult = implode(" ", $storeForImplode);
+            $data[$i] = $implodeResult;
+
         }
+
 
 
 

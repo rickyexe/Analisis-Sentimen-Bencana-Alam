@@ -61,6 +61,88 @@ class DataRepositories {
     }
 
 
+    public function getTrainingForTesting(){
+        $post1 = Post::select('post')->where('id', '>' , 30)->where('id', '<', 101)->get();
+        $post2 = Post::select('post')->where('id', '>' , 130)->where('id', '<', 201)->get();
+        $post3 = Post::select('post')->where('id', '>' , 230)->get();
+
+        $data = array();
+        foreach ($post1 as $item) {
+            array_push($data, $item->post);
+        }
+        foreach ($post2 as $item) {
+            array_push($data, $item->post);
+        }
+        foreach ($post3 as $item) {
+            array_push($data, $item->post);
+        }
+
+        return $data;
+    }
+
+    public function getSentimenValueTraining(){
+        $sentimen1 = Post::select('nilai_sentimen')->where('id', '>' , 30)->where('id', '<', 101)->get();
+        $sentimen2 = Post::select('nilai_sentimen')->where('id', '>' , 130)->where('id', '<', 201)->get();
+        $sentimen3 = Post::select('nilai_sentimen')->where('id', '>' , 230)->get();
+
+        $data = array();
+        foreach ($sentimen1 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+        foreach ($sentimen2 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+        foreach ($sentimen3 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+
+        return $data;
+    }
+
+    public function getTestingData(){
+        //indeks 1-30
+        // indeks 101 -130
+        // indeks 201- 230
+        $post1 = Post::select('post')->where('id', '<' , 31)->get();
+        $post2 = Post::select('post')->where('id', '>' , 100)->where('id', '<', 131)->get();
+        $post3 = Post::select('post')->where('id', '>' , 200)->where('id', '<', 231)->get();
+
+        $data = array();
+        foreach ($post1 as $item) {
+            array_push($data, $item->post);
+        }
+        foreach ($post2 as $item) {
+            array_push($data, $item->post);
+        }
+        foreach ($post3 as $item) {
+            array_push($data, $item->post);
+        }
+
+        return $data;
+
+
+    }
+
+    public function getSentimenValueTesting(){
+        $sentimen1 = Post::select('nilai_sentimen')->where('id', '<' , 31)->get();
+        $sentimen2 = Post::select('nilai_sentimen')->where('id', '>' , 100)->where('id', '<', 131)->get();
+        $sentimen3 = Post::select('nilai_sentimen')->where('id', '>' , 200)->where('id', '<', 231)->get();
+
+        $data = array();
+        foreach ($sentimen1 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+        foreach ($sentimen2 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+        foreach ($sentimen3 as $item) {
+            array_push($data, $item->nilai_sentimen);
+        }
+
+        return $data;
+    }
+
+
 
 }
 

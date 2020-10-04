@@ -22,7 +22,7 @@ class SlangRepositories {
         return $slang;
     }
 
-    public function getSlangConvertion(){
+    public function getSlangConversion(){
 
         $collection = (new FastExcel)->configureCsv(',')->import('storage/dictionary/new_kamusalay.csv');
 
