@@ -20,14 +20,17 @@ class TugasAkhirController extends Controller
 
 
     public  function index(){
-
         return view('homepage');
-
     }
 
     public function processing($query){
 
-        $tweets = $this->dataRepositories->getTweets($query);
+        $dataTweet = $this->dataRepositories->getTweets($query);
+        $jumlahTweet = count($dataTweet);
+        $tweets = array_slice($dataTweet, 0 , ceil($jumlahTweet/2));
+        $tweetsForResult = array_slice($dataTweet, 0 , ceil($jumlahTweet/2));
+        $username = array_slice($dataTweet, ceil($jumlahTweet/2));
+
         $trainingData = $this->dataRepositories->getTrainingData();
         $sentimenValue = $this->dataRepositories->getSentimenValue();
 
@@ -64,6 +67,7 @@ class TugasAkhirController extends Controller
         $kecil = 0;
         $sedang = 0;
         $besar = 0;
+        $storageResult = array();
 
 
         for ($i = 0 ; $i < count($tweetsTFIDF) ; $i++)
@@ -71,24 +75,44 @@ class TugasAkhirController extends Controller
             $result = $classifier->predict($tweetsTFIDF[$i]);
             if($result ==  'kecil'){
                $kecil++;
+               array_push($storageResult, 'Kecil');
             }
             else if ($result == 'sedang'){
                 $sedang++;
+                array_push($storageResult, 'Sedang');
             }
             else if ($result == 'besar')
             {
                 $besar++;
+                array_push($storageResult, 'Besar');
             }
         }
 
-        return view('hasil-analisa', compact('kecil', 'sedang', 'besar'));
+        $finalData = array();
+
+        for ($i =0 ; $i < count($tweetsForResult); $i++)
+        {
+            $data = [$username[$i], $tweetsForResult[$i], $storageResult[$i]];
+            array_push($finalData, $data);
+        }
+
+
+
+
+        return view('hasil-analisa', compact('kecil', 'sedang', 'besar', 'query', 'finalData'));
+    }
+
+    public function trainingPage(){
+
+        return view('training');
     }
 
 
-    public function training(){
+    public function training($kValue){
         $trainingData = $this->dataRepositories->getTrainingForTesting();
         $sentimenValue = $this->dataRepositories->getSentimenValueTraining();
         $testingData = $this->dataRepositories->getTestingData();
+        $testingDataForResult = $this->dataRepositories->getTestingData();
         $sentimenValueTesting = $this->dataRepositories->getSentimenValueTesting();
 
         $trainingData = $this->processRepositories->preProcessing($trainingData);
@@ -97,8 +121,6 @@ class TugasAkhirController extends Controller
         $combinedData = array_merge($trainingData, $testingData);
 
         $tfidf = $this->processRepositories->getTFIDF($combinedData); // 2 dimensional array
-
-
 
 
         $trainingTFIDF  = array();
@@ -115,13 +137,7 @@ class TugasAkhirController extends Controller
         }
 
 
-
-
-        $accuracyResult = array();
-
-        for ($i = 1 ; $i <= 10 ; $i++)
-        {
-            $classifier = new KNearestNeighbors($k=$i, new Cosine());
+            $classifier = new KNearestNeighbors($k=$kValue, new Cosine());
             $classifier->train($trainingTFIDF, $sentimenValue);
             $predictedSentiment = array();
 
@@ -142,18 +158,27 @@ class TugasAkhirController extends Controller
 
             $resultAccuracy = Accuracy::score($sentimenValueTesting, $predictedSentiment );
             $resultAccuracy = $resultAccuracy * 100;
-            $result = "Accuracy for k=".$i." is ".$resultAccuracy." %";
-            array_push($accuracyResult, $result);
 
-        }
+            $finalData = array();
 
 
+            for ($i =0 ; $i < count($sentimenValueTesting); $i++)
+            {
+                $status = true;
+                if($sentimenValueTesting[$i] != $predictedSentiment[$i] )
+                {
+                 $status = false;
+                }
+                $data = [$testingDataForResult[$i], $sentimenValueTesting[$i], $predictedSentiment[$i], $status];
+                array_push($finalData, $data);
+            }
 
-        dd($accuracyResult);
 
 
+        return view('training-result', compact('resultAccuracy', 'finalData', 'kValue'));
 
     }
+
 
 
 }

@@ -13,10 +13,10 @@ class DataRepositories {
 
     public function getTweets($query){
 
-        $consumer_key = env('CONSUMER_KEY', 'abcde');
-        $consumer_secret = env('CONSUMER_SECRET', 'abcde');
-        $access_token = env('ACCESS_TOKEN', 'abcde');
-        $access_token_secret = env('ACCESS_TOKEN_SECRET', 'abcde');
+        $consumer_key = 'HYbfpODBDP5xxEdBfAL0lgKOG';
+        $consumer_secret = '8xyHpZ768t5XCeZPsPu8dXuQqBSFB5qQMe9UR1ORVdlhAKTrvX';
+        $access_token = '1301891683093626884-MiHAhcwQZNwG1HqdynGjh1Lmg3cmqM';
+        $access_token_secret = '3LwoyxP9LmyKoGQ0fwjeLbJ7ngTLOSHCPmFdvL0tml99i';
         $connection = new TwitterOAuth($consumer_key,$consumer_secret, $access_token , $access_token_secret);
         $content = $connection->get("account/verify_credentials");
         $status = $connection->get("search/tweets", ["q" => $query, 'count' => 100 ,'lang' => 'id', 'result_type' => 'mixed', 'tweet_mode' => 'extended']);
@@ -27,6 +27,11 @@ class DataRepositories {
         for ($i = 0 ; $i < count($convertedStatus['statuses']) ; $i++)
         {
          array_push($data,$convertedStatus['statuses'][$i]->full_text );
+        }
+
+        for ($i = 0 ; $i < count($convertedStatus['statuses']) ; $i++)
+        {
+            array_push($data,$convertedStatus['statuses'][$i]->user->screen_name );
         }
 
         return $data;

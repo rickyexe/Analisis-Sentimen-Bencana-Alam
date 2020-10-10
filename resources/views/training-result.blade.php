@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href={{asset('css/main.css')}} rel="stylesheet" />
@@ -83,11 +84,11 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-{{--    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">--}}
-{{--        <div class="navbar-nav">--}}
-{{--            <a class="nav-link active" href="#">Beranda <span class="sr-only">(current)</span></a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">--}}
+    {{--        <div class="navbar-nav">--}}
+    {{--            <a class="nav-link active" href="#">Beranda <span class="sr-only">(current)</span></a>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 </nav>
 <div class="container">
     <div class="row">
@@ -96,7 +97,7 @@
                 <form>
                     <div class="inner-form">
                         <div class="input-field second-wrap">
-                            <input id="search" type="text" placeholder="Cari tingkat bencana alam daerah tertentu..." />
+                            <input id="search" type="text" placeholder="Masukkan nilai K" />
                         </div>
                         <div class="input-field third-wrap">
                             <button class="btn-search" id="searchButton" type="button">
@@ -114,36 +115,37 @@
 
     </div>
     <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-3" style="text-align: center">
-            <h1 >Apa itu <span style="font-weight: bold; color: #ff0000">Bencana Alam?</span></h1>
-            <p>Menurut Undang-Undang Nomor 24 Tahun 2007, <span class="bold">bencana alam</span> adalah adalah bencana yang diakibatkan oleh peristiwa atau serangkaian peristiwa yang disebabkan oleh alam antara lain berupa gempa bumi, tsunami, gunung meletus, banjir, kekeringan, angin topan, dan tanah longsor.</p>
-
+        <div class="col-md-12">
+            <h1 style="text-align: center">Tingkat akurasi dengan nilai K = {{$kValue}} sebesar <span class="bold">{{number_format($resultAccuracy,2)}}</span> %</h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1 >Apa tujuan website ini dibuat?</h1>
-            <p>Website ini dibuat agar masyarakat dapat mengetahui tingkatan bencana yang terjadi di suatu daerah dengan cepat</p>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1>Bagaimana cara kerja website ini?</h1>
-            <p>Website ini akan mengumpulkan tweet dari media sosial Twitter berdasarkan kata pencarian yang dimasukkan oleh user. Data tweet hasil pencarian ini akan olah dengan algoritma machine learning untuk didapatkan kesimpulan tingkatan bencana alam yang terjadi sesuai daerah sesuai dengan kata pencarian.</p>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1>DISCLAIMER</h1>
-            <p>Hasil pencarian dari website ini hanyalah deteksi dini dari tingkatan bencana alam dan tidak bisa dijadikan sebagai patokan utama.</p>
-
-        </div>
-    </div>
-
-
-
+            <div class="col-md-12 mt-3">
+                <table id="result" class="table table-striped table-bordered" style="width:100%; text-align: center">
+                    <thead>
+                    <tr>
+                        <th>Tweet</th>
+                        <th>Kategori Bencana Asli</th>
+                        <th>Kategori Bencana Sistem</th>
+                        <th>Validasi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for($i = 0 ; $i < count($finalData) ; $i++)
+                            <tr>
+                                <td>{{$finalData[$i][0]}}</td>
+                                <td>{{ucwords($finalData[$i][1])}}</td>
+                                <td>{{ucwords($finalData[$i][2])}}</td>
+                                @if($finalData[$i][3] == true)
+                                    <td><img src="{{asset('images/right.png')}}"  style="background: none; width: 50px; height: 50px" alt=""></td>
+                                @else
+                                <td><img src="{{asset('images/wrong.png')}}"  style="background: none; width: 50px; height: 50px" alt=""></td>
+                                @endif
+                            </tr>
+                    @endfor
+                    </tbody>
+                </table>
+            </div>
 </div>
 <footer class="footer mt-5" style="background-color: #3097D1">
     <div class="container">
@@ -167,7 +169,13 @@
 {{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#result').DataTable();
+    } );
 
     document.getElementById("searchButton").addEventListener("click", search);
 
@@ -179,7 +187,7 @@
 
     function search(){
         var id = document.getElementById("search").value
-        window.location.href = "{{ url('hasil-analisa') }}" + '/' + id;
+        window.location.href = "{{ url('training-result') }}" + '/' + id;
         $(".preloader").fadeIn();
     }
 

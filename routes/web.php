@@ -13,13 +13,7 @@
 
 Route::get('/', 'TugasAkhirController@index');
 Route::get('/hasil-analisa/{query}', 'TugasAkhirController@processing')->name('hasil-analisa');
-Route::get('/training', 'TugasAkhirController@training')->name('hasil-analisa');
-
-Route::get('/user', 'UserController@index');
-Route::get('/user/edit/{id}', 'UserController@edit');
-Route::post('/user/update/{id}', 'UserController@update');
-Route::get('/user/delete/{id}', 'UserController@destroy');
-
-Auth::routes();
+Route::get('/training','TugasAkhirController@trainingPage' );
+Route::get('/training-result/{k}', 'TugasAkhirController@training');
 
 Route::get('/home', 'HomeController@index')->name('home');

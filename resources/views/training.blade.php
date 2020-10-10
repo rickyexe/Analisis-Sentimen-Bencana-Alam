@@ -83,11 +83,11 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-{{--    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">--}}
-{{--        <div class="navbar-nav">--}}
-{{--            <a class="nav-link active" href="#">Beranda <span class="sr-only">(current)</span></a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">--}}
+    {{--        <div class="navbar-nav">--}}
+    {{--            <a class="nav-link active" href="#">Beranda <span class="sr-only">(current)</span></a>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 </nav>
 <div class="container">
     <div class="row">
@@ -96,7 +96,7 @@
                 <form>
                     <div class="inner-form">
                         <div class="input-field second-wrap">
-                            <input id="search" type="text" placeholder="Cari tingkat bencana alam daerah tertentu..." />
+                            <input id="search" type="text" placeholder="Masukkan nilai K" />
                         </div>
                         <div class="input-field third-wrap">
                             <button class="btn-search" id="searchButton" type="button">
@@ -113,47 +113,47 @@
         </div>
 
     </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-3" style="text-align: center">
-            <h1 >Apa itu <span style="font-weight: bold; color: #ff0000">Bencana Alam?</span></h1>
-            <p>Menurut Undang-Undang Nomor 24 Tahun 2007, <span class="bold">bencana alam</span> adalah adalah bencana yang diakibatkan oleh peristiwa atau serangkaian peristiwa yang disebabkan oleh alam antara lain berupa gempa bumi, tsunami, gunung meletus, banjir, kekeringan, angin topan, dan tanah longsor.</p>
+{{--    <div class="row">--}}
+{{--        <div class="col-md-12 cardExplanation shadow-lg mt-3" style="text-align: center">--}}
+{{--            <h1 >Apa itu <span style="font-weight: bold; color: #ff0000">Bencana Alam?</span></h1>--}}
+{{--            <p>Menurut Undang-Undang Nomor 24 Tahun 2007, <span class="bold">bencana alam</span> adalah adalah bencana yang diakibatkan oleh peristiwa atau serangkaian peristiwa yang disebabkan oleh alam antara lain berupa gempa bumi, tsunami, gunung meletus, banjir, kekeringan, angin topan, dan tanah longsor.</p>--}}
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1 >Apa tujuan website ini dibuat?</h1>
-            <p>Website ini dibuat agar masyarakat dapat mengetahui tingkatan bencana yang terjadi di suatu daerah dengan cepat</p>
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">--}}
+{{--            <h1 >Apa tujuan website ini dibuat?</h1>--}}
+{{--            <p>Website ini dibuat agar masyarakat dapat mengetahui tingkatan bencana yang terjadi di suatu daerah dengan cepat</p>--}}
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1>Bagaimana cara kerja website ini?</h1>
-            <p>Website ini akan mengumpulkan tweet dari media sosial Twitter berdasarkan kata pencarian yang dimasukkan oleh user. Data tweet hasil pencarian ini akan olah dengan algoritma machine learning untuk didapatkan kesimpulan tingkatan bencana alam yang terjadi sesuai daerah sesuai dengan kata pencarian.</p>
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">--}}
+{{--            <h1>Bagaimana cara kerja website ini?</h1>--}}
+{{--            <p>Website ini akan mengumpulkan tweet dari media sosial Twitter berdasarkan kata pencarian yang dimasukkan oleh user. Data tweet hasil pencarian ini akan olah dengan algoritma machine learning untuk didapatkan kesimpulan tingkatan bencana alam yang terjadi sesuai daerah sesuai dengan kata pencarian.</p>--}}
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
-            <h1>DISCLAIMER</h1>
-            <p>Hasil pencarian dari website ini hanyalah deteksi dini dari tingkatan bencana alam dan tidak bisa dijadikan sebagai patokan utama.</p>
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">--}}
+{{--            <h1>DISCLAIMER</h1>--}}
+{{--            <p>Hasil pencarian dari website ini hanyalah deteksi dini dari tingkatan bencana alam dan tidak bisa dijadikan sebagai patokan utama.</p>--}}
 
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
 
 
 
 </div>
-<footer class="footer mt-5" style="background-color: #3097D1">
-    <div class="container">
-        <div class="row">
-            <h1 class="display-5 font-weight-bold text-center" style="font-size: 1.25em; color: white">Ricky Gideon 2020</h1>
-        </div>
+{{--<footer class="footer mt-5" style="background-color: #3097D1">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <h1 class="display-5 font-weight-bold text-center" style="font-size: 1.25em; color: white">Ricky Gideon 2020</h1>--}}
+{{--        </div>--}}
 
-    </div>
+{{--    </div>--}}
 
-</footer>
+{{--</footer>--}}
 {{--<footer class="footer">--}}
 {{--    <div class="container" style="margin-left: auto">--}}
 {{--        <span>Ricky Gideon 2020</span>--}}
@@ -179,7 +179,7 @@
 
     function search(){
         var id = document.getElementById("search").value
-        window.location.href = "{{ url('hasil-analisa') }}" + '/' + id;
+        window.location.href = "{{ url('training-result') }}" + '/' + id;
         $(".preloader").fadeIn();
     }
 
