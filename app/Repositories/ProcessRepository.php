@@ -47,6 +47,8 @@ class ProcessRepository {
             $data[$key] = $stopword->remove($value);
         }
 
+
+
         return $data;
 
     }
@@ -57,10 +59,9 @@ class ProcessRepository {
         $tf->fit($data);
         $tf->transform($data);
 
+
         $tfidf = new TfIdfTransformer($data);
         $tfidf->transform($data);
-
-
 
         return $data;
     }
@@ -68,7 +69,7 @@ class ProcessRepository {
     public function removeSymbolandNumber($data){
 
         foreach  ($data as $key => $value) {
-            $data[$key] = preg_replace('/[^A-Za-z\s]+/', '', $value); //add 0-9 if you want number to be added
+            $data[$key] = preg_replace('/[^a-zA-Z\s]+/', '', $value);
         }
 
         return $data;
@@ -87,8 +88,7 @@ class ProcessRepository {
     public function removeURL($data)
     {
 
-        $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
-//        $regex = "https?://.*?\s+";
+        $regex = "@(https?://([-\w\.]+)(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
 
         foreach ($data as $key => $value){
             $data[$key] = preg_replace($regex, '', $value);
@@ -99,7 +99,7 @@ class ProcessRepository {
     }
 
     public function removeAdd($data){
-        $regex = '/@[a-z0-9:]+/i';
+        $regex = '/@[a-z_0-9:]+/i';
 
         foreach ($data as $key => $value){
             $data[$key] = preg_replace($regex, '', $value);
@@ -119,7 +119,6 @@ class ProcessRepository {
     }
 
     public function replaceSlangWord($data){
-
         $slang = $this->slangRepositories->getSlang();
         $slangConversion = $this->slangRepositories->getSlangConversion();
 
@@ -149,12 +148,7 @@ class ProcessRepository {
             $data[$i] = $implodeResult;
 
         }
-
-
-
-
         return $data;
-
     }
 
 
