@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">KBA</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-2 mt-5">
-            <h1 style="text-align: center">Hasil analisa untuk <span style="font-weight: bold; font-style: italic">{{$query}}</span> </h1>
+            <h1 style="text-align: center">Berdasarkan hasil analisa maka <span style="font-weight: bold; font-style: italic">{{$query}}</span> dapat dikategorikan sebagai tingkat bencana <span style="font-weight: bold; font-style: italic">{{$hasilKesimpulan}}</span>  </h1>
         </div>
     </div>
     <div class="row">
@@ -44,7 +44,7 @@
                 @for($i = 0 ; $i < count($finalData) ; $i++)
                     <tr>
                         <td>{{$finalData[$i][0]}}</td>
-                        <td>{{ucwords($finalData[$i][1])}}</td>
+                        <td>{{$finalData[$i][1]}}</td>
                         <td>{{ucwords($finalData[$i][2])}}</td>
                     </tr>
                 @endfor
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 mt-3" style="justify-content: center">
+        <div class="col-md-6 offset-3 mt-5" style="justify-content: center">
             <canvas id="chart" width="100" height="100"></canvas>
         </div>
 

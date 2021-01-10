@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href={{asset('css/main.css')}} rel="stylesheet" />
-    <title>Welcome to the world of analytics stuff</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    <title>Sistem Klasifikasi Bencana Alam</title>
     <style>
         .preloader {
             position: fixed;
@@ -97,7 +98,7 @@
                 <form>
                     <div class="inner-form">
                         <div class="input-field second-wrap">
-                            <input id="search" type="text" placeholder="Masukkan nilai K" />
+                            <input id="search" type="number" placeholder="Masukkan nilai K" />
                         </div>
                         <div class="input-field third-wrap">
                             <button class="btn-search" id="searchButton" type="button">
@@ -171,6 +172,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -187,8 +189,16 @@
 
     function search(){
         var id = document.getElementById("search").value
-        window.location.href = "{{ url('training-result') }}" + '/' + id;
-        $(".preloader").fadeIn();
+        if(id == null || id == "")
+        {
+            console
+            toastr.error("Nilai K tidak boleh kosong");
+        }
+        else
+        {
+            window.location.href = "{{ url('training-result') }}" + '/' + id;
+            $(".preloader").fadeIn();
+        }
     }
 
 

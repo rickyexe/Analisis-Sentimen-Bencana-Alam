@@ -11,9 +11,23 @@
 |
 */
 
+//main program
 Route::get('/', 'TugasAkhirController@index');
+Route::get('/preprocessing', 'TugasAkhirController@preprocessing');
 Route::get('/hasil-analisa/{query}', 'TugasAkhirController@processing')->name('hasil-analisa');
-Route::get('/training','TugasAkhirController@trainingPage' );
+Route::get('/training', function(){
+    return view('training');
+});
 Route::get('/training-result/{k}', 'TugasAkhirController@training');
 
+
+
+//additional program
+Route::get('/training-result2/{k}', 'TugasAkhirController@training2');
+Route::get('/validation', 'TugasAkhirController@validation');
+Route::get('/validation2', 'TugasAkhirController@validation2');
+Route::get('/move', 'TugasAkhirController@move');
+Route::get('/graph', 'TugasAkhirController@graphdata');
+Route::get('/proofing', 'TugasAkhirController@proofing');
+Route::get('/crawl/{crawl}', 'TugasAkhirController@crawl');
 Route::get('/home', 'HomeController@index')->name('home');

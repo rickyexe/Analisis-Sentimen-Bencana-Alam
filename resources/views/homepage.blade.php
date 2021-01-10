@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href={{asset('css/main.css')}} rel="stylesheet" />
-    <title>Welcome to the world of analytics stuff</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+    <title>Sistem Klasifikasi Bencana Alam</title>
     <style>
         .preloader {
             position: fixed;
@@ -89,14 +90,16 @@
 {{--        </div>--}}
 {{--    </div>--}}
 </nav>
+
 <div class="container">
+
     <div class="row">
         <div class="col-md-8 offset-2 mt-5">
             <div class="s003">
                 <form>
                     <div class="inner-form">
                         <div class="input-field second-wrap">
-                            <input id="search" type="text" placeholder="Cari tingkat bencana alam daerah tertentu..." />
+                            <input id="search" type="text"  placeholder="Cari tingkat bencana alam daerah tertentu..." />
                         </div>
                         <div class="input-field third-wrap">
                             <button class="btn-search" id="searchButton" type="button">
@@ -137,7 +140,7 @@
     <div class="row">
         <div class="col-md-12 cardExplanation shadow-lg mt-5" style="text-align: center">
             <h1>DISCLAIMER</h1>
-            <p>Hasil pencarian dari website ini hanyalah deteksi dini dari tingkatan bencana alam dan tidak bisa dijadikan sebagai patokan utama.</p>
+            <p>Hasil pencarian dari website ini hanyalah deteksi dini dari tingkatan bencana alam dan tidak bisa dijadikan sebagai pedoman utama.</p>
 
         </div>
     </div>
@@ -167,6 +170,12 @@
 {{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script type="text/javascript">
+    @if(Session::has('fail'))
+    toastr.error("{{ Session::get('fail') }}");
+    @endif
+</script>
 <script type="text/javascript">
 
     document.getElementById("searchButton").addEventListener("click", search);
@@ -179,6 +188,10 @@
 
     function search(){
         var id = document.getElementById("search").value
+        if(id == "" || id == " " )
+        {
+            id = "kosong";
+        }
         window.location.href = "{{ url('hasil-analisa') }}" + '/' + id;
         $(".preloader").fadeIn();
     }
